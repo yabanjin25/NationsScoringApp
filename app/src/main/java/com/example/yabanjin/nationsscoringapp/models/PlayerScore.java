@@ -4,14 +4,17 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Column.ForeignKeyAction;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
+
+import java.util.List;
 
 @Table(name = "PlayerScores")
 public class PlayerScore extends Model {
-    @Column(name = "game", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
-    public Game game;
+    @Column(name = "game_id", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
+    public int gameId;
 
-    @Column(name = "player", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
-    public Player player;
+    @Column(name = "player_id", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
+    public int playerId;
 
     @Column(name = "vp_from_tokens")
     public int vpFromTokens;
@@ -55,5 +58,32 @@ public class PlayerScore extends Model {
 
     public PlayerScore() {
         super();
+    }
+
+    public PlayerScore(int gameId, int playerId, int vpFromTokens, int vpFromColonies, int vpFromWorkersOnBuildings, int vpFromWorkersOnMilitary,
+                       int totalGold, int totalFood, int totalStone, int totalBooks, int totalMilitaryStrength, int totalStability, int vpFromResources,
+                       int turnOrder, int finalPlace) {
+        super();
+        this.gameId = gameId;
+        this.playerId = playerId;
+        this.vpFromTokens = vpFromTokens;
+        this.vpFromColonies = vpFromColonies;
+        this.vpFromWorkersOnBuildings = vpFromWorkersOnBuildings;
+        this.vpFromWorkersOnMilitary = vpFromWorkersOnMilitary;
+        this.totalGold = totalGold;
+        this.totalFood = totalFood;
+        this.totalStone = totalStone;
+        this.totalBooks = totalBooks;
+        this.totalMilitaryStrength = totalMilitaryStrength;
+        this.totalStability = totalStability;
+        this.vpFromResources = vpFromResources;
+        this.turnOrder = turnOrder;
+        this.finalPlace = finalPlace;
+    }
+
+    public static List<PlayerScore> getAllPlayerScores() {
+        return new Select().from(PlayerScore.class)
+                .orderBy("id ASC")
+                .execute();
     }
 }

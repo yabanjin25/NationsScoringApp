@@ -3,6 +3,7 @@ package com.example.yabanjin.nationsscoringapp.models;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,9 @@ public class Game extends Model {
         super();
     }
 
-    public List<PlayerScore> playerScores() {
-        return getMany(PlayerScore.class, "PlayerScore");
+    public static List<Game> getAllGames() {
+        return new Select().from(Game.class)
+                .orderBy("id ASC")
+                .execute();
     }
 }
