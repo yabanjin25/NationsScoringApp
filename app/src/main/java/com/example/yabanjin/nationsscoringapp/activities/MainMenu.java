@@ -1,9 +1,11 @@
 package com.example.yabanjin.nationsscoringapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.activeandroid.ActiveAndroid;
 import com.example.yabanjin.nationsscoringapp.R;
@@ -38,5 +40,10 @@ public class MainMenu extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onScoreNewGame(View v) {
+        Intent i = new Intent(this, ScoreNewGameMain.class);
+        startActivity(i);
     }
 }

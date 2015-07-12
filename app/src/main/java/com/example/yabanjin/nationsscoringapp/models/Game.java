@@ -22,4 +22,11 @@ public class Game extends Model {
                 .orderBy("id ASC")
                 .execute();
     }
+
+    public static long createNewGame(Date date) {
+        Game g = new Game();
+        g.datePlayed = date;
+        g.save();
+        return g.getId();
+    }
 }

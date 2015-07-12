@@ -1,19 +1,33 @@
 package com.example.yabanjin.nationsscoringapp.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.example.yabanjin.nationsscoringapp.R;
+import com.example.yabanjin.nationsscoringapp.adapters.NewPlayerScoreArrayAdapter;
+import com.example.yabanjin.nationsscoringapp.models.PlayerScore;
+
+import java.util.ArrayList;
 
 
 public class ScoreNewGameMain extends ActionBarActivity {
+
+    protected ArrayList<PlayerScore> playerScores;
+    protected NewPlayerScoreArrayAdapter aPlayerScores;
+    protected ListView lvPlayerScores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_new_game_main);
+
+        playerScores = new ArrayList<>();
+        aPlayerScores = new NewPlayerScoreArrayAdapter(this, playerScores);
+        lvPlayerScores = (ListView) findViewById(R.id.lvNewPlayerScores);
+        lvPlayerScores.setAdapter(aPlayerScores);
     }
 
     @Override
